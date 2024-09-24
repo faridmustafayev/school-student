@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Activity table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: activities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about activities

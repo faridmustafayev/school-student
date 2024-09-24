@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+
+  card_postgres:
+    container_name: card_postgres
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: card
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - card_postgres_data:/var/lib/postgresql/data
+
+  school_postgres:
+    container_name: school_postgres
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: school
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - school_postgres_data:/var/lib/postgresql/data
+
+  user_postgres:
+    container_name: user_postgres
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: user
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+    volumes:
+      - user_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    container_name: redis_school_student
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_school_student_data:/var/lib/redis
+    environment:
+#      REDIS_PORT: 1001
+      REDIS_HOST: localhost
+
+volumes:
+  card_postgres_data:
+  school_postgres_data:
+  redis_school_student_data:
+  user_postgres_data:
