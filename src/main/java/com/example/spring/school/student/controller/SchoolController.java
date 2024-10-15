@@ -5,6 +5,7 @@ import com.example.spring.school.student.model.request.StudentRequest;
 import com.example.spring.school.student.model.response.SchoolResponse;
 import com.example.spring.school.student.service.abstraction.SchoolService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ public class SchoolController {
 
     @PostMapping("/{id}/student")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("@permissionService.checkPermission(#id, 'CARDS', 'VIEW')")
     public void addStudentToSchool(@PathVariable Long id, @RequestBody StudentRequest request){
         schoolService.addStudentToSchool(id, request);
     }

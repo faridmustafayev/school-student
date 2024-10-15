@@ -3,11 +3,15 @@ package com.example.spring.school.student.exception;
 import com.example.spring.school.student.constants.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import static com.example.spring.school.student.constants.ExceptionConstant.ACCESS_DENIED_CODE;
+import static com.example.spring.school.student.constants.ExceptionConstant.ACCESS_DENIED_MESSAGE;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -58,4 +62,12 @@ public class ErrorHandler {
                         .build()
         );
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(FORBIDDEN)
+    public ErrorResponse handle(AccessDeniedException ex) {
+        log.error("AccessDeniedException, ", ex);
+        return new ErrorResponse(ACCESS_DENIED_CODE, ACCESS_DENIED_MESSAGE);
+    }
+
 }
