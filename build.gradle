@@ -78,6 +78,8 @@ dependencies {
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
 	implementation 'com.nimbusds:nimbus-jose-jwt:9.15.2'
 //	implementation 'org.springframework.boot:spring-boot-starter-security:2.7.5'
 }
