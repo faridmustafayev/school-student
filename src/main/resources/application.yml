@@ -11,6 +11,9 @@ spring:
   liquibase:
     change-log: classpath:liquibase/changelog-master.yml
   rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
     listener:
       simple:
         retry:

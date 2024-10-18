@@ -37,6 +37,18 @@ services:
     volumes:
       - school_postgres_data:/var/lib/postgresql/data
 
+  rabbitmq_postgres:
+    container_name: rabbitmq_postgres
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: rabbit
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5672:5672"
+    volumes:
+      - rabbitmq_postgres_data:/var/lib/postgresql/data
+
 #  user_postgres:
 #    container_name: user_postgres
 #    image: "postgres:latest"
@@ -66,3 +78,4 @@ volumes:
   redis_school_student_data:
   user_postgres_data:
   permission_postgres_data:
+  rabbitmq_postgres_data:
