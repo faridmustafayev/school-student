@@ -19,7 +19,7 @@ public class AuthServiceHandler implements AuthService {
     @Override
     public TokenResponse signIn(SignInRequest request) {
         UserResponseDto userResponse = userClient.checkCredential(request.getUsername(), request.getPassword());
-        return tokenService.generateToken(userResponse.getId(), 2);
+        return tokenService.generateToken(userResponse.getId(), 50);
     }
 
     @Override

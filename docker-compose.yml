@@ -12,18 +12,18 @@ services:
       - "5436:5432"
     volumes:
       - permission_postgres_data:/var/lib/postgresql/data
-#
-#  card_postgres:
-#    container_name: card_postgres
-#    image: "postgres:latest"
-#    environment:
-#      POSTGRES_DB: card
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: password
-#    ports:
-#      - "5433:5432"
-#    volumes:
-#      - card_postgres_data:/var/lib/postgresql/data
+
+  card_postgres:
+    container_name: card_postgres
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: card
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - card_postgres_data:/var/lib/postgresql/data
 
   school_postgres:
     container_name: school_postgres
@@ -36,6 +36,16 @@ services:
       - "5434:5432"
     volumes:
       - school_postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
 
 #  user_postgres:
 #    container_name: user_postgres
@@ -66,3 +76,4 @@ volumes:
   redis_school_student_data:
   user_postgres_data:
   permission_postgres_data:
+  rabbitmq_postgres_data:
