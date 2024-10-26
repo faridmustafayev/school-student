@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create School_Activity table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: school_activities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: school_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activity_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: school_activities
+            baseColumnNames: school_id
+            referencedTableName: schools
+            referencedColumnNames: id
+            constraintName: fk_school_activity_schools
+
+        - addForeignKeyConstraint:
+            baseTableName: school_activities
+            baseColumnNames: activity_id
+            referencedTableName: activities
+            referencedColumnNames: id
+            constraintName: fk_school_activity_activities
+
+        - sql:
+            dbms: postgresql
+            sql: "COMMENT ON TABLE school_activities IS 'Table to store information about school_activity'"
